@@ -1,0 +1,29 @@
+#start-record-btn{
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #DDD;
+    font-size: 60px;
+    height: auto;
+}
+
+#start-record-btn.active{
+    color: darkslategrey;
+}
+
+#note-textarea{
+    border: none;
+    box-shadow: none;
+    font-size: 20px;
+    resize: none;
+}
+
+#anchor2{
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+#anchor2 .dfn{
+    
+}

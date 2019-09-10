@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Edvanta - Speech to Definition</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+        <link rel="stylesheet" href="existing.css">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+        <div class="container">
+            <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+
+            <div class="app"> 
+                <div class="input-single">
+                    <button id="start-record-btn" title="Start Recording"><i class="fas fa-microphone"></i></button>
+<!--                    <textarea id="note-textarea" placeholder="" rows="6"></textarea>-->
+                    <div id="note-textarea"></div>
+                    <div id="note-keywords"></div>
+                </div>         
+            </div>
+        </div>
+        
+
+        <div id="anchor1"></div>
+        <hr>
+        <div id="anchor2"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script defer src="fontawesome/js/all.js"></script>
+        <script src="speech.js"></script>
+        <script src="wiki/script.js" type="text/javascript"></script>
+
+
+    </body>
+</html>
+
+<script src="https://unpkg.com/compromise"></script>
