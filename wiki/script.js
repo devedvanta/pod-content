@@ -68,6 +68,12 @@ function WD_i(item) {
         url_tpl = wp+aq+t+ item +p+r+c+f;
         $.getJSON(url_tpl, function (data) {
             $.each(data.query.pages, function (i, json) { // THIS DO THE TRICK !
+                console.log(json);
+                console.log( `i = ${i}`);
+                if (!(json.extract)) {
+                    console.log(`not found for ${item}`);
+                    return;
+                }
                 sent = json.extract.toString();
                 result = "<b><t>" + item + "</t> ⇒</b> " + sent;
                 $('#anchor2').append("<div class='dfn'>"+result+"</div>");// append

@@ -15,7 +15,7 @@ var instructions = $('#recording-instructions');
 var notesList = $('ul#notes');
 
 var noteContent = '';
-
+var wordsUsed = {};
 // Get all notes from previous sessions and display them.
 var notes = getAllNotes();
 renderNotes(notes);
@@ -30,6 +30,8 @@ renderNotes(notes);
 // When true, the silence period is longer (about 15 seconds),
 // allowing us to keep recording even when the user pauses. 
 recognition.continuous = true;
+recognition.interimResults = true;
+recognition.maxAlternatives = 10;
 
 // This block is called every time the Speech APi captures a line. 
 recognition.onresult = function(event) {
@@ -40,6 +42,7 @@ recognition.onresult = function(event) {
     var current = event.resultIndex;
 
     // Get a transcript of what was said.
+    console.log(event.results);
     var transcript = event.results[current][0].transcript;
 
     // Add the current transcript to the contents of our Note.
@@ -56,7 +59,10 @@ recognition.onresult = function(event) {
         textarea.scrollTop = textarea.scrollHeight;
         
         var doc_test = nlp(transcript);
-        keywords = doc_test.topics().data();
+        keywords = doc_test.nouns().slice(0, 50).data();
+        // keywords = doc_test.topics().data();
+        
+        console.log(transcript, keywords);
         keywords.forEach(highlightAndDefine);
 //        console.log(doc_test.topics().data());
     }
@@ -70,8 +76,16 @@ function highlightAndDefine(item){
 //        kw = keyword;
 //    }
 //    noteKeywords.html(kw);
-    List = [keyword];
-    WD_list(List);
+    
+    if (wordsUsed[keyword]) {
+        console.log(`DUplicate ${keyword}`);
+        return;
+    } else {
+        wordsUsed[keyword] = true;
+        List = [keyword];
+        console.log(Object.keys(wordsUsed));
+        WD_list(List);
+    }
 }
 
 recognition.onstart = function() { 
@@ -88,6 +102,21 @@ recognition.onerror = function(event) {
     };
 }
 
+recognition.stop = () => {
+    console.log("Restarting!!!!!!");
+    recognition.start();
+};
+
+
+recognition.onend = () => {
+    console.log("Ended. Restarting!!!!!!");
+    recognition.start();
+};
+
+
+// setInterval( ()=> {
+//     console.log(recognition);
+// }, 1000);
 
 
 /*-----------------------------

@@ -1,0 +1,22 @@
+{
+  "name": "pod-content",
+  "version": "1.0.0",
+  "description": "",
+  "main": "speech.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devedvanta/pod-content.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devedvanta/pod-content/issues"
+  },
+  "homepage": "https://github.com/devedvanta/pod-content#readme",
+  "dependencies": {
+    "compromise": "^11.14.3"
+  }
+}
