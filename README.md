@@ -1,14 +1,14 @@
 ## Jumper
 
 
-## Modules
+### Modules
 * Speech-to-Text
 * Entity Linking
 * RTS-Knowledge base population
 * RTS-Knowledge visualization
 
 
-### Speech-to-Text
+## Speech-to-Text
 Currently using browser APIs for STT.
 Exploring alternatives like Watson. Would like to be platform agnostic.
 
@@ -34,4 +34,14 @@ Speech recognition systems provide computers with the ability to listen to user 
 * NIF = NLP Interchage Format - [NIF 2.0 Specs](https://persistence.uni-leipzig.org/nlp2rdf/specification/api.html) 
 
 Opentapioca can be self hosted, and also has a [public NIF API](https://opentapioca.org/api/nif)
+
+## RTS-Knowledge base
+* Time
+* What / Where / When / How
+* Its like a memory
+
+
+## Visualizations
+* Do we define a information min size?
+* Do we define a information max size? (eg. at max only at a go n entities are added to the graph)
 
