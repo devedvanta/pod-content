@@ -7,12 +7,16 @@ async function entityMatch() {
     method: "get",
     url: "https://opentapioca.org/api/annotate",
     qs: {
-      query: "kartik arora is a fan of Amitabh Bachhan"
+      query: "Brad  lives in Jaka"
     },
     headers: headers,
     json: true
   });
   console.log(wikiEntityLiking);
+  let qid_list = wikiEntityLiking.annotations.map(each_match => each_match.best_qid);
+  quid_list = qid_list.filter(quid => !!quid)
+  console.log(qid_list);
+  return qid_list;
 }
 
 async function getEntityImages(QID) {
@@ -33,7 +37,13 @@ async function _getEntityPrimaryImages(QID) {
     SELECT ?img
     WHERE 
     {
-      wd:${QID} wdt:P18 ?img
+      wd:${QID} wdt:P18 ?image
+      
+      BIND(REPLACE(wikibase:decodeUri(STR(?image)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") as ?fileName) .
+      BIND(REPLACE(?fileName, " ", "_") as ?safeFileName)
+      BIND(MD5(?safeFileName) as ?fileNameMD5) .
+      BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?fileNameMD5, 1, 1), "/", SUBSTR(?fileNameMD5, 1, 2), "/", ?safeFileName, "/650px-", ?safeFileName) as ?img)
+  
     }
   `;
   const primaryImages = await request({
@@ -63,7 +73,12 @@ async function _getEntitySecondaryImages(QID) {
   WHERE 
   {
     wd:${QID} ?prop ?itemLevel2.
-    ?itemLevel2 wdt:P18 ?imgLvl2.
+    ?itemLevel2 wdt:P18 ?image.
+    BIND(REPLACE(wikibase:decodeUri(STR(?image)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") as ?fileName) .
+    BIND(REPLACE(?fileName, " ", "_") as ?safeFileName)
+    BIND(MD5(?safeFileName) as ?fileNameMD5) .
+    BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?fileNameMD5, 1, 1), "/", SUBSTR(?fileNameMD5, 1, 2), "/", ?safeFileName, "/650px-", ?safeFileName) as ?imgLvl2)
+  
     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
   }
   `;
@@ -85,4 +100,4 @@ async function _getEntitySecondaryImages(QID) {
 }
 
 entityMatch();
-getEntityImages('Q9570');
+// getEntityImages('Q9570');
