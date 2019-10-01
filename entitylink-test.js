@@ -100,4 +100,4 @@ async function _getEntitySecondaryImages(QID) {
 }
 
 entityMatch();
-// getEntityImages('Q9570');
+getEntityImages('Q9570');
