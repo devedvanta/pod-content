@@ -11,15 +11,13 @@ import { showMicAtLevel, showSessionEnd, showSessionError } from './gviewr_funct
 
 async function parseAndActOnText(text) {
   let quid_list = await entityMatch(text);
-  console.log("In main:", quid_list);
+  
   quid_list.forEach(async quid => {
     
       if (entityInGraphCheck(quid)) {
         jumpToAHeight(quid);
       } else {
-        console.log('Getting image');
         let images_from_wiki = await getEntityImages(quid);
-        console.log('pushing image');
         pushImagesToViewer(images_from_wiki, quid);
       }
 
