@@ -6,7 +6,9 @@
     <script src="components/rain-of-entities.js"></script>
     <script src="components/rain-of-posts.js"></script>
     <script src="components/sky-canvas.js"></script>
+    <script src="components/alongpath.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.js"></script>
     <link rel="stylesheet" href="style.css">
 
     <script src="main.js" type="module"></script>
@@ -20,13 +22,17 @@
 
         </a-assets>
         <!-- <a-box position="0 1 -2" width="2" depth="0.2" height="2" color="#3E3E3E" static-body></a-box> -->
-
-        <a-entity id="theMic" gltf-model="#type-person-boy" position="2 2 -2" static-body></a-entity>
-        <a-entity id="rig" position="0 1.6 0">
-            <a-entity id="camera" camera look-controls wasd-controls></a-entity>
+        <a-entity id="focusPoint" position="0 0 0" static-body></a-entity>
+        <a-entity id="theMic" gltf-model="#type-person-boy" position="0 2 0" scale="4 4 4" static-body look-at="#rig"></a-entity>
+        <a-entity id="rig" position="0 1.6 0" >
+            <a-entity id="camera" camera="active: true" look-controls wasd-controls></a-entity>
+        </a-entity>
+        <a-entity id="rig2" position="0 1.6 0">
+            <a-entity id="camera2" camera look-controls wasd-controls></a-entity>
+            <!-- <a-entity id="camera_placeHolder" gltf-model="#type-person-boy" position="2 2 -2" static-body></a-entity> -->
         </a-entity>
     </a-scene>
-
+    <div id="overlay-text">Test value</div>
     <script src="./kaaro_stream.js"></script>
     <!-- <script  src="./kaaro.js"></script> -->
 </body>

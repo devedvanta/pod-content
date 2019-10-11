@@ -1,4 +1,4 @@
-import { listenForAllTheThingsTheUserSaysMostlyEntitiesAndShowThemOnTheViewer } from './kaaro.js';
+import { listenOnOpenChannelForUserHasSaidOnDifferentPlatforms } from './kaaro_headless.js';
 
 console.log("in main.js");
-listenForAllTheThingsTheUserSaysMostlyEntitiesAndShowThemOnTheViewer();
+listenOnOpenChannelForUserHasSaidOnDifferentPlatforms();

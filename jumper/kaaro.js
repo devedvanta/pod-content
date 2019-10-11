@@ -11,7 +11,6 @@ import { showMicAtLevel, showSessionEnd, showSessionError } from './gviewr_funct
 
 async function parseAndActOnText(text) {
   let quid_list = await entityMatch(text);
-  
   quid_list.forEach(async quid => {
     
       if (entityInGraphCheck(quid)) {
@@ -25,21 +24,11 @@ async function parseAndActOnText(text) {
 }
 
 async function listenForAllTheThingsTheUserSaysMostlyEntitiesAndShowThemOnTheViewer() {
-  // var colors = [ 'aqua' , 'azure' , 'beige', 'bisque', 'black', 'blue', 'brown', 'chocolate', 'coral' ... ];
-  // var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
-  var recognizing;
+  
+  
   var recognition = new SpeechRecognition();
-  // reset();
-  // recognition.onend = reset;
-
-  // var speechRecognitionList = new SpeechGrammarList();
-  // speechRecognitionList.addFromString(grammar, 1);
-
-  // recognition.grammars = speechRecognitionList;
-  // recognition.continuous = true;
-  // recognition.lang = 'en-US';
   recognition.interimResults = true;
-  // recognition.maxAlternatives = 1;
+  
   recognition.start();
 
   recognition.onresult = function(event) {
