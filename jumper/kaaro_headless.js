@@ -14,6 +14,9 @@ import {
   showSessionError
 } from "./gviewr_functions.mjs";
 
+import { startStreamingTheCanvas } from './kaaro_stream.mjs';
+
+
 async function parseAndActOnText(text) {
   let quid_list = await entityMatch(text);
   quid_list.forEach(async quid => {
@@ -57,9 +60,13 @@ async function listenOnOpenChannelForUserHasSaidOnDifferentPlatforms() {
     console.log("onConnect");
     client.subscribe("kaaroStream/input");
     client.subscribe("kaaroStream/cameraSwitch");
+    client.subscribe("kaaroStream/forceReStream");
     let message = new Paho.Message("Hello from Streaming canvas");
     message.destinationName = "kaaroStream/streaming_canvas";
     client.send(message);
+
+    //Once connection to MQTT established, it is time to start streaming the canvas.
+    startStreamingTheCanvas();
   }
 
   // called when the client loses its connection
@@ -75,6 +82,9 @@ async function listenOnOpenChannelForUserHasSaidOnDifferentPlatforms() {
     if (message.destinationName === 'kaaroStream/cameraSwitch') {
         console.log('switching cam');
         switchCamera();
+    } if(message.destinationName === 'kaaroStream/forceReStream') {
+      console.log('Force Restream triggered');
+      startStreamingTheCanvas();
     } else {
         parseAndActOnText(message.payloadString);
     }
